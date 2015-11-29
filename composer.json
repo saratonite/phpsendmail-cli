@@ -1,4 +1,9 @@
 {
+	"autoload":{
+		"psr-4":{
+			"saratonite\\phpsendmail\\" : "src/"
+		}
+	},
     "require": {
         "swiftmailer/swiftmailer": "^5.4",
         "symfony/console": "^2.7",
