@@ -1,12 +1,14 @@
 {
 	"autoload":{
 		"psr-4":{
-			"saratonite\\phpsendmail\\" : "src/"
+			"saratonite\\phpsendmail\\" : "src/",
+			"saratonite\\phpsendmail\\tests\\": "tests/"
 		}
 	},
     "require": {
         "swiftmailer/swiftmailer": "^5.4",
         "symfony/console": "^2.7",
-        "vlucas/phpdotenv": "^2.1"
+        "vlucas/phpdotenv": "^2.1",
+		"michelf/php-markdown": "^1.5"
     }
 }
