@@ -3,7 +3,7 @@ namespace saratonite\phpsendmail\Parser;
 
 interface ParserInterface {
 
-	public function parse($text);
+	public  function parse($text);
 
 	
 }
