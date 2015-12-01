@@ -22,9 +22,11 @@ class MailCommand extends Command{
         // Composing Mail
         
         $parser = new MarkdownParser();
-        $mail_content = $parser->parse("#Hello World , This is a markdown content");
 
-        
+        $file_content = file_get_contents(__DIR__."/../../mails/mail.md");
+        $mail_content = $parser->parse($file_content);
+
+
         $message = \Swift_Message::newInstance();
         $message->setSubject("Sample message")
         ->setFrom([getenv('FROM_EMAIL_ID')=>getenv('FROM_EMAIL_NAME')])
