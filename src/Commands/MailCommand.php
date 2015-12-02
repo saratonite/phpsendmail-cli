@@ -2,7 +2,9 @@
 namespace saratonite\phpsendmail\Commands;
 
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 use saratonite\phpsendmail\Parser\MarkdownParser;
@@ -12,12 +14,24 @@ class MailCommand extends Command{
     {
         $this
             ->setName('mail')
-            ->setDescription('Send email using SMTP');
+            ->setDescription('Send email using SMTP')
+            ->addArgument(
+                'to',
+                InputArgument::OPTIONAL,
+                'Recipient Eamil Address'
+                );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $output->writeln('--- Started Mail Command ---');
+
+        $to = $input->getArgument('to');
+
+        if(!$to){
+            $to = getenv('TO_EMAIL_ID');
+        }
+
 
         // Composing Mail
         
@@ -30,7 +44,7 @@ class MailCommand extends Command{
         $message = \Swift_Message::newInstance();
         $message->setSubject("Sample message")
         ->setFrom([getenv('FROM_EMAIL_ID')=>getenv('FROM_EMAIL_NAME')])
-        ->setTo([getenv('TO_EMAIL_ID')=>getenv('TO_EMAIL_NAME')])
+        ->setTo([$to=>getenv('TO_EMAIL_NAME')])
         // setContentType('text/html');
         ->setBody($mail_content,'text/html');
 
