@@ -49,7 +49,8 @@ class MailCommand extends Command{
         ->setBody($mail_content,'text/html');
 
         // Creating Mail Transport object
-        $transport = \Swift_SmtpTransport::newInstance('smtp.gmail.com', 465, 'ssl')
+        $transport = \Swift_SmtpTransport::newInstance(getenv('SMTP_HOST'), getenv('SMTP_PORT'),getenv('SMTP_ENC'))
+        ->setAuthMode('LOGIN')
         ->setUsername(getenv('SMTP_USERNAME'))
         ->setPassword(getenv('SMTP_PASSWORD'));
 
